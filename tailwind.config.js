@@ -13,6 +13,9 @@ export default {
       backgroundColor: {
         secondary: "rgb(250, 250, 250)",
       },
+      height: {
+        "nav-list-height": "calc(100vh - 76px)",
+      },
     },
   },
   plugins: [],

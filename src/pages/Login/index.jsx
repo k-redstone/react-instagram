@@ -1,8 +1,37 @@
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+
 const LoginPage = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    resetField,
+  } = useForm();
+
+  const onSubmit = (formValues) => {
+    resetField("login");
+    resetField("password");
+    alert(JSON.stringify(formValues));
+  };
+
+  const LoginRegister = register("login", {
+    required: {
+      value: true,
+      message: "사용자 이름을 입력하세요.",
+    },
+  });
+
+  const passwordRegister = register("password", {
+    required: {
+      value: true,
+      message: "비밀번호를 입력하세요. ",
+    },
+  });
+
   return (
     <div>
       <div className="min-h-screen">
-        {/* <p className="font-bold text-3xl text-blue-300">로그인 페이지</p> */}
         <section className="flex flex-col h-screen">
           <main className="w-full h-full mt-16">
             <div className="flex justify-center items-center h-full w-full">
@@ -14,26 +43,51 @@ const LoginPage = () => {
                 />
               </div>
               <div className="w-[350px] ">
-                <div className="w-full border border-stone-400 flex flex-col justify-star items-center">
+                <div className="w-full border border-stone-400 flex flex-col items-center">
                   <img
                     className="w-[175px] h-[51px] my-12"
                     src="/images/logo_instagram.png"
                     alt="logo"
                   />
                   {/* react hook form 사용 예정 */}
-                  <input
-                    className="w-[268px] h-[38px] text-xs bg-secondary border border-stone-400 rounded-md mb-1 focus:outline-none"
-                    type="text"
-                    placeholder="전화번호, 사용자 이름 또는 이메일"
-                  />
-                  <input
-                    className="w-[268px] h-[38px] bg-secondary text-xs border border-stone-400 rounded-md mb-3 focus:outline-none"
-                    type="text"
-                    placeholder="비밀번호"
-                  />
-                  <button className="w-[268px] h-[32px] text-lg text-white bg-blue-400 border rounded-lg">
-                    로그인
-                  </button>
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-col items-start"
+                  >
+                    <input
+                      {...LoginRegister}
+                      className="w-[268px] h-[38px] text-xs bg-secondary border border-stone-400 rounded-md mb-1 focus:outline-none"
+                      type="text"
+                      placeholder="전화번호, 사용자 이름 또는 이메일"
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="login"
+                      render={({ message }) => (
+                        <span className="text-red-500 text-sm pb-1">
+                          {message}
+                        </span>
+                      )}
+                    />
+                    <input
+                      {...passwordRegister}
+                      className="w-[268px] h-[38px] bg-secondary text-xs border border-stone-400 rounded-md mb-1 focus:outline-none"
+                      type="text"
+                      placeholder="비밀번호"
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="password"
+                      render={({ message }) => (
+                        <span className="text-red-500 text-sm pb-4 mb-1">
+                          {message}
+                        </span>
+                      )}
+                    />
+                    <button className="w-[268px] h-[32px] text-lg text-white bg-blue-400 border rounded-lg">
+                      로그인
+                    </button>
+                  </form>
                   <div className="flex justify-center items-center mt-4">
                     <div className="border-t-2 w-24"></div>
                     <span className="px-4">또는</span>

@@ -1,10 +1,18 @@
 import GlobalNav from "../../layout/GlobalNav";
+import Article from "../../components/Article";
+import jsonData from '../../assets/data.json';
+
 
 const HomePage = () => {
+
+
+  console.log(jsonData)
   return (
     <div className="flex">
       <GlobalNav />
-      <p className="font-bold text-3xl text-blue-300 ml-[335px]">Home</p>
+      <main className="ml-[335px]">
+        <Article data={jsonData} />
+      </main>
     </div>
   );
 };

@@ -1,0 +1,26 @@
+{ 
+  "id" : 1, 
+  "author" : "박상우", 
+  "post_content" : "Develop하는게 너무 빡셈",
+  "liked" : 
+    ["박상우", "길동이"], 
+  "comments" : [ 
+    { 
+      "comment_author" : "길동이",
+      "comment" : "test1" 
+    },
+    { 
+      "comment_author" : "박상우",
+      "comment" : "test2" 
+    },
+    { 
+      "comment_author" : "길동이",
+      "comment" : "test3" 
+    },
+    { 
+      "comment_author" : "길동이",
+      "comment" : "test4" 
+    }
+  ] 
+
+} 

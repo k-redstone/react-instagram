@@ -86,13 +86,7 @@ const RecommendUser = () => {
             </nav>
             <p>© 2024 INSTAGRAM FROM META</p>
           </div>
-
-
-
-
         </div>
-
-
       </div>
     </div>
   )

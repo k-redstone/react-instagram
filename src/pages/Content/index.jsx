@@ -16,7 +16,7 @@ const ContentPage = () => {
         <Article data={jsonData} />
         <Article data={jsonData} />
       </main>
-      <div className=" hidden md:block pl-20">
+      <div className="hidden xl:block pl-20">
         <RecommendUser />
       </div>
     </div>

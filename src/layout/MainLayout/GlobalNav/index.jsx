@@ -8,12 +8,12 @@ import {
   AiOutlineMore,
 } from "react-icons/ai";
 import { MdOutlineExplore, MdOndemandVideo } from "react-icons/md";
-import NavItem from "../../components/NavItem";
+import NavItem from "../../../components/NavItem";
 
 const GlobalNav = () => {
   return (
     <div>
-      <nav className="w-[335px] fixed min-h-screen flex flex-col px-4 border-r-2">
+      <nav className="hidden md:flex lg:w-[335px] md:w-[220px] fixed min-h-screen  flex-col px-4 border-r-2 ">
         <img
           className="w-[103px] h-[29px] mt-10 ml-2"
           src="/images/logo_instagram.png"

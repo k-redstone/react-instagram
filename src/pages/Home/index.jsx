@@ -1,8 +1,8 @@
-import GlobalNav from "../../layout/GlobalNav";
 import Article from "../../components/Article";
 import jsonData from '../../assets/data.json';
-import RecommendUser from "../../layout/RecommendUser";
-import Story from "../../layout/Story";
+import RecommendUser from "./RecommendUser";
+import Story from "./Story";
+import HomeLayout from "../../layout/MainLayout";
 
 
 const HomePage = () => {
@@ -10,9 +10,8 @@ const HomePage = () => {
 
   console.log(jsonData)
   return (
-    <div className="flex">
-      <GlobalNav />
-      <div className="flex w-full justify-center ml-[335px] mt-4">
+    <div>
+      <HomeLayout>
         <main className="w-[630px]">
           <div className="mb-6">
             <Story />
@@ -21,11 +20,10 @@ const HomePage = () => {
           <Article data={jsonData} />
           <Article data={jsonData} />
         </main>
-        <div className="pl-20">
+        <div className="hidden md:block pl-20">
           <RecommendUser />
         </div>
-
-      </div>
+      </HomeLayout>
     </div>
   );
 };

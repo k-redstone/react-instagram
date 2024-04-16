@@ -33,7 +33,7 @@ const Article = ({data }) => {
     }
   })
   return(
-    <div>
+    <div className="flex justify-center mb-4">
       <article className="flex flex-col w-[470px]">
         {/* 상단 */}
         <div className="pb-3">

@@ -1,28 +1,35 @@
-
+import StoryItem from "../../../components/StoryItem"
 
 const Story = () => {
+
+  const [isSeen, setSeen ] = useState(false)
+
+  const handleStory = () => {
+    console.log('eee')
+    setSeen(!isSeen)
+  }
+
+  const datas = [
+    { 
+      id: 1,
+      img: '/images/sample.jpg',
+      nickname: 'zokbal'
+    },
+    { 
+      id: 2,
+      img: '/images/sample.jpg',
+      nickname: '상우'
+    }
+  ]
+   
   return(
-
     <div>
-
       <div className="flex py-2 text-sm text-neutral-500">
-
-        <div className="flex flex-col justify-center mx-2">
-          <div className="w-16 h-16 border rounded-full overflow-hidden">
-            <img src="/images/sample.jpg" alt="sample" />
-          </div>
-          <p className="text-center">name</p>
-        </div>
-        <div className="flex flex-col justify-center mx-2">
-          <div className="w-16 h-16 border rounded-full overflow-hidden">
-            <img src="/images/sample.jpg" alt="sample" />
-          </div>
-          <p className="text-center">name</p>
-        </div>
-
-
-
-
+        {
+          datas.map((data) => (
+            <StoryItem key={data.id} data={data}/>
+          ))
+        }
       </div>
     </div>
   )
@@ -30,6 +37,3 @@ const Story = () => {
 
 
 export default Story
-
-
-// img 64px

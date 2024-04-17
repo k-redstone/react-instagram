@@ -1,5 +1,6 @@
 import {
   AiOutlineHome,
+  AiFillHome,
   AiOutlineSearch,
   AiOutlineMessage,
   AiOutlineHeart,
@@ -9,7 +10,7 @@ import {
 } from "react-icons/ai";
 import { MdOutlineExplore, MdOndemandVideo } from "react-icons/md";
 import NavItem from "../../components/NavItem";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 const GlobalNav = () => {

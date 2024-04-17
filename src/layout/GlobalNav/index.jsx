@@ -25,14 +25,30 @@ const GlobalNav = () => {
       </Link>
       <div className="h-nav-list-height flex flex-col justify-between">
         <ul className="mt-10">
-          <NavItem icon={<AiOutlineHome />} text={"홈"} url={'/'}/>
+          <NavLink to="/">
+            {({ isActive }) => (
+              <NavItem 
+                icon={isActive? <AiFillHome /> : <AiOutlineHome />}
+                selected ={isActive}
+                text={"홈"}
+              />
+            )}
+          </NavLink>
           <NavItem icon={<AiOutlineSearch />} text={"검색"} url={'/'} />
           <NavItem icon={<MdOutlineExplore />} text={"탐색 탭"} url={'/'} />
           <NavItem icon={<MdOndemandVideo />} text={"릴스"} url={'/'}  />
           <NavItem icon={<AiOutlineMessage />} text={"메시지"} url={'/'}  />
           <NavItem icon={<AiOutlineHeart />} text={"알림"} url={'/'}  />
           <NavItem icon={<AiOutlinePlusSquare />} text={"만들기"} url={'/'}  />
-          <NavItem icon={<AiOutlineUser />} text={"프로필"} url={'/profile'}  />
+          <NavLink to="/profile">
+            {({ isActive }) => (
+              <NavItem 
+                icon={<AiOutlineUser />}
+                selected ={isActive}
+                text={"프로필"}
+              />
+            )}
+          </NavLink>
         </ul>
         <div className="mt-10">
           <NavItem icon={<AiOutlineMore />} text={"더보기"} />

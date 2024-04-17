@@ -1,5 +1,5 @@
 import { MdAddAPhoto } from "react-icons/md";
-
+import { NavLink } from "react-router-dom";
 
 const ProfilePage = () => {
 
@@ -43,7 +43,6 @@ const ProfilePage = () => {
             </header>
             
             {/* 하이라이트 */}
-            {/* 87 */}
           
             <div className="mb-11">
               <div className="flex">
@@ -63,15 +62,22 @@ const ProfilePage = () => {
               </div>  
             </div>
 
-            <nav className="text-neutral-500">
-              <div className="flex justify-center border-t-2 py-4">
-                <div className="mr-8">
-                  <span>게시물</span>
-                </div>
-                <div className="">
-                  <span>태그됨</span>
-                </div>
-
+            <nav className="text-neutral-500 h-[53px]">
+              <div className="flex h-full justify-center items-center border-t-2">
+                <NavLink to="/profile" className="h-full">
+                  {({isActive}) => (
+                    <div className="h-full mr-8 ">
+                      <span className={`h-full flex items-center border-t-2 ${isActive ? 'border-black text-black' : 'border-white'} `}>게시물</span>
+                    </div>
+                  )}
+                </NavLink>
+                <NavLink to="/" className="h-full">
+                  {({isActive}) => (
+                    <div className="h-full">
+                      <span className={`h-full flex items-center border-t-2 ${isActive ? ' border-black text-black' : 'border-white'} `}>태그됨</span>
+                    </div>
+                  )}
+                </NavLink>
 
               </div>
             </nav>

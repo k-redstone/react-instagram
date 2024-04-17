@@ -10,7 +10,7 @@ export const routerInfo = [
   },
   {
     path: "/content/example",
-    element: <ContentPage />
+    element: <ContentPage />,
   },
 
   {
@@ -22,7 +22,7 @@ export const routerInfo = [
         element: <ContentPage />,
       },
       {
-        path: "profile",
+        path: "/:userName",
         element: <ProfilePage />,
       },
     ],

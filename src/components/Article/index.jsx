@@ -11,16 +11,23 @@ import {
 } from "react-icons/pi";
 import TextareaAutosize from 'react-textarea-autosize';
 import { useForm } from "react-hook-form";
-// import { useRef } from "react";
+import { useState } from "react";
 
 
-const Article = ({data }) => {
+const Article = ({ data }) => {
+  const [isLike, setLike] = useState(false)
   console.log("fasdf", data)
+
+
   const {
     register,
     handleSubmit,
     resetField
   } = useForm()
+
+  const handleLike = () => {
+    setLike(!isLike)
+  }
 
   const onSubmit = (formValues) => {
     resetField('comment')
@@ -68,9 +75,9 @@ const Article = ({data }) => {
               <div className="flex grow">
                 <div className="p-2 box-border">
                   {
-                    data.liked.includes(data.author)
-                    ? <AiFillHeart color="red"/>
-                    : <AiOutlineHeart />
+                    isLike
+                    ? <AiFillHeart color="red" onClick={handleLike}/>
+                    : <AiOutlineHeart onClick={handleLike} />
 
                   }
                 </div>

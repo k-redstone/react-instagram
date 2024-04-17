@@ -1,0 +1,128 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "imageUrl": "https://example.com/post1.jpg",
+      "caption": "Beautiful sunset! 🌅",
+      "likes": 20,
+      "likedBy": [2, 3],
+      "comments": [
+        {
+          "id": 1,
+          "userId": 2,
+          "text": "Amazing shot!"
+        },
+        {
+          "id": 2,
+          "userId": 1,
+          "text": "Thanks!"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "imageUrl": "https://example.com/post1.jpg",
+      "caption": "Beautiful sunset! 🌅",
+      "likes": 20,
+      "likedBy": [2, 3],
+      "comments": [
+        {
+          "id": 1,
+          "userId": 2,
+          "text": "Amazing shot!"
+        },
+        {
+          "id": 2,
+          "userId": 1,
+          "text": "Thanks!"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "imageUrl": "https://example.com/post1.jpg",
+      "caption": "Beautiful sunset! 🌅",
+      "likes": 20,
+      "likedBy": [2, 3],
+      "comments": [
+        {
+          "id": 1,
+          "userId": 2,
+          "text": "Amazing shot!"
+        },
+        {
+          "id": 2,
+          "userId": 1,
+          "text": "Thanks!"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "imageUrl": "https://example.com/post1.jpg",
+      "caption": "Beautiful sunset! 🌅",
+      "likes": 20,
+      "likedBy": [2, 3],
+      "comments": [
+        {
+          "id": 1,
+          "userId": 2,
+          "text": "Amazing shot!"
+        },
+        {
+          "id": 2,
+          "userId": 1,
+          "text": "Thanks!"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "imageUrl": "https://example.com/post2.jpg",
+      "caption": "Having fun at the beach! 🏖️",
+      "likes": 15,
+      "likedBy": [1],
+      "comments": [
+        {
+          "id": 3,
+          "userId": 1,
+          "text": "Looks like a great day!"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "user1",
+      "fullName": "John Doe",
+      "profilePicture": "https://example.com/user1.jpg",
+      "posts": [1, 2],
+      "followers": [2, 3],
+      "following": [2]
+    },
+    {
+      "id": 2,
+      "username": "user2",
+      "fullName": "Jane Smith",
+      "profilePicture": "https://example.com/user2.jpg",
+      "posts": [],
+      "followers": [1],
+      "following": [1]
+    },
+    {
+      "id": 3,
+      "username": "user3",
+      "fullName": "Jane Smith",
+      "profilePicture": "https://example.com/user2.jpg",
+      "posts": [],
+      "followers": [1],
+      "following": [1]
+    }
+  ]
+}

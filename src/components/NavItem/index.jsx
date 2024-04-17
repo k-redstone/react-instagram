@@ -7,7 +7,13 @@ const NavItem = ({ icon, text, selected }) => {
         <div className="box-border text-2xl mr-5 group-hover:scale-110 group-hover:transition-all">
           {icon}
         </div>
-        <span className={`peer text-base ${selected ? 'font-semibold' : 'font-medium' }`}>{text}</span>
+        <span
+          className={`peer text-base ${
+            selected ? "font-semibold" : "font-medium"
+          }`}
+        >
+          {text}
+        </span>
       </li>
     </div>
   );
@@ -16,6 +22,7 @@ const NavItem = ({ icon, text, selected }) => {
 NavItem.propTypes = {
   icon: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
+  selected: PropTypes.bool,
 };
 
 export default NavItem;

@@ -2,6 +2,7 @@ import HomePage from "../pages/Home";
 import LoginPage from "../pages/Login";
 import ContentPage from "../pages/Content";
 import ProfilePage from "../pages/Profile";
+import ErrorPage from "../pages/Error";
 
 export const routerInfo = [
   {
@@ -10,7 +11,7 @@ export const routerInfo = [
   },
   {
     path: "/content/example",
-    element: <ContentPage />
+    element: <ContentPage />,
   },
 
   {
@@ -22,8 +23,12 @@ export const routerInfo = [
         element: <ContentPage />,
       },
       {
-        path: "profile",
+        path: "/:userName",
         element: <ProfilePage />,
+      },
+      {
+        path: "/not-found",
+        element: <ErrorPage />,
       },
     ],
   },

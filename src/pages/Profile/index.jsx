@@ -1,5 +1,6 @@
 import { MdAddAPhoto } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import ProfileArticle from "../../layout/ProfileArticle";
 
 const ProfilePage = () => {
 
@@ -84,15 +85,13 @@ const ProfilePage = () => {
 
             {/* 상태 추가예정(게시물 유무) */}
             <div className="my-10">
-              <div className="m-auto">
-                <div className="flex flex-col items-center">
-                  <MdAddAPhoto className="text-6xl mb-5"/>
-                  <p className="font-semibold text-3xl mb-3">사진 공유</p>
-                  <p className="text-base mb-10">사진을 공유하면 회원님의 프로필에 표시됩니다.</p>
-                  <p className="text-base text-blue-500 font-semibold">첫 사진 공유하기</p>
-
-                </div>
-              </div>
+              {/* <div className="flex flex-col items-center">
+                <MdAddAPhoto className="text-6xl mb-5"/>
+                <p className="font-semibold text-3xl mb-3">사진 공유</p>
+                <p className="text-base mb-10">사진을 공유하면 회원님의 프로필에 표시됩니다.</p>
+                <p className="text-base text-blue-500 font-semibold">첫 사진 공유하기</p>
+              </div> */}
+              <ProfileArticle />
             </div>
 
 

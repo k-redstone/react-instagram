@@ -1,4 +1,3 @@
-import MainLayout from "../../layout/MainLayout"
 import Story from "./Story"
 import Article from "../../components/Article"
 import RecommendUser from "./RecommendUser"

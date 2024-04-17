@@ -16,7 +16,7 @@ import { useState } from "react";
 
 const Article = ({ data }) => {
   const [isLike, setLike] = useState(false)
-  console.log("fasdf", data)
+  console.log("Article Render")
 
 
   const {

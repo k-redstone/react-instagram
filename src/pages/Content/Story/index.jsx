@@ -1,14 +1,6 @@
 import StoryItem from "../../../components/StoryItem"
-import { useState } from "react"
 
 const Story = () => {
-
-  const [isSeen, setSeen ] = useState(false)
-
-  const handleStory = () => {
-    console.log('eee')
-    setSeen(!isSeen)
-  }
 
   const datas = [
     { 

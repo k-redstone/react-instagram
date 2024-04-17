@@ -49,7 +49,7 @@ const LoginPage = () => {
                     src="/images/logo_instagram.png"
                     alt="logo"
                   />
-                  {/* react hook form 사용 예정 */}
+                  
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="flex flex-col items-start"

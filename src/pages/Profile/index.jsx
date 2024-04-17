@@ -43,7 +43,6 @@ const ProfilePage = () => {
             </header>
             
             {/* 하이라이트 */}
-            {/* 87 */}
           
             <div className="mb-11">
               <div className="flex">

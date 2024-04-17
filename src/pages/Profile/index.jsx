@@ -1,14 +1,14 @@
 import { MdAddAPhoto } from "react-icons/md";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import ProfileArticle from "../../layout/ProfileArticle";
 import dummyData from "../../assets/dummy/data.json";
 import { useState, useEffect } from "react";
 
 const ProfilePage = () => {
   const { userName } = useParams();
+  const navigate = useNavigate();
   const [userData, setUser] = useState(false);
   const [postData, setPostData] = useState(false);
-  // console.log(userData.followers.length());
 
   const getUserPosts = () => {
     const user = dummyData.users.find((user) => user.username === userName);
@@ -21,7 +21,7 @@ const ProfilePage = () => {
         setPostData(userPost);
       }
     } else {
-      history.push("./not-found");
+      navigate("/not-found");
     }
   };
 
@@ -91,7 +91,7 @@ const ProfilePage = () => {
 
             <nav className="text-neutral-500 h-[53px]">
               <div className="flex h-full justify-center items-center border-t-2">
-                <NavLink to="/profile" className="h-full">
+                <NavLink to={`/${userName}`} className="h-full">
                   {({ isActive }) => (
                     <div className="h-full mr-8 ">
                       <span

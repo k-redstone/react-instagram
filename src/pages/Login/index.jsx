@@ -1,18 +1,15 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { ErrorMessage } from "@hookform/error-message";
-import { useEffect } from "react";
-import axios from "axios";
-
-
+// import { useEffect } from "react";
+import api from "../../util/api";
 
 // 추후 삭제예정
 import userStore from "../../stores/userStore";
-import dummyData from "../../assets/dummy/data.json";
-
+// import dummyData from "../../assets/dummy/data.json";
 
 const LoginPage = () => {
-  const {setUserInfo, setToken} = userStore()
+  const { setUserInfo, setToken } = userStore();
   const navigate = useNavigate();
   // 추후 삭제예정
 
@@ -21,12 +18,12 @@ const LoginPage = () => {
   //   const data = dummyData.users.find((user) => user.username === 'user1');
   //   console.log(setUserInfo)
   //   setUserInfo(data)
-    
+
   //   console.log('render by useEffect')
   // },[])
 
   // console.log(userInfo)
-// ----------------------------
+  // ----------------------------
   const {
     register,
     formState: { errors },
@@ -37,21 +34,22 @@ const LoginPage = () => {
   const onSubmit = (formValues) => {
     resetField("username");
     resetField("password");
-    const url = import.meta.env.VITE_LOGIN_URL
+    const url = import.meta.env.VITE_LOGIN_URL;
     // const url = 'http://localhost:5173/login'
     // const headers = {
-    //   Authorization: `Token ${token}` 
+    //   Authorization: `Token ${token}`
     // }
-    axios.post(url +'login/', formValues)
-    .then(res => {
-      console.log(res)
-      setToken(res.data.token)
-      setUserInfo(res.data.user)
-      navigate('/')
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    api
+      .post(url + "login/", formValues)
+      .then((res) => {
+        console.log(res);
+        setToken(res.data.token);
+        setUserInfo(res.data.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const LoginRegister = register("username", {
@@ -88,7 +86,7 @@ const LoginPage = () => {
                     src="/images/logo_instagram.png"
                     alt="logo"
                   />
-                  
+
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="flex flex-col items-start"

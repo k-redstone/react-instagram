@@ -1,7 +1,27 @@
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useEffect } from "react";
+
+
+// 추후 삭제예정
+import userStore from "../../stores/userStore";
+import dummyData from "../../assets/dummy/data.json";
+
 
 const LoginPage = () => {
+  const {setUserInfo} = userStore()
+  // 추후 삭제예정
+
+
+  useEffect(() => {
+    const data = dummyData.users.find((user) => user.username === 'user1');
+    console.log(setUserInfo)
+    setUserInfo(data)
+    console.log('render by useEffect')
+  },[])
+
+  // console.log(userInfo)
+// ----------------------------
   const {
     register,
     formState: { errors },

@@ -1,10 +1,9 @@
-
 import { Outlet } from "react-router";
 import MainLayout from "../../layout/MainLayout";
 import GlobalNav from "../../layout/GlobalNav";
 
-
 const HomePage = () => {
+
   return (
     <div className="flex">
       <GlobalNav />

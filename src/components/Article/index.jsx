@@ -50,7 +50,7 @@ const Article = ({ data }) => {
               <img src="/images/sample.jpg" alt="sample" />
             </div>
             <div className="flex grow">
-              <div className="pl-3">{data.author}</div>
+              <div className="pl-3">{data.userId}</div>
               <div className="pl-3">3시간</div>
 
             </div>
@@ -95,14 +95,14 @@ const Article = ({ data }) => {
 
             {/* 좋아요 갯수 */}
             <div className="pl-2 font-bold">
-              <span>좋아요 {data.liked.length}개</span>
+              <span>좋아요 {data.likes}개</span>
             </div>
             {/* 게시글 내용 */}
             <div className="flex flex-row pl-2">
               <div className="mr-2 font-bold">
-                <span>{data.author}</span>
+                <span>{data.userId}</span>
               </div>
-              <span>{data.post_content}</span>
+              <span>{data.caption}</span>
             </div>
             {/* 댓글 내용 */}
             {/* 댓글 3개 보여줄 예정 */}

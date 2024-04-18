@@ -62,9 +62,9 @@
     },
     {
       "id": 4,
-      "userId": 1,
+      "userId": 2,
       "imageUrl": "https://example.com/post1.jpg",
-      "caption": "Beautiful sunset! 🌅",
+      "caption": "Beautiful! 🌅",
       "likes": 20,
       "likedBy": [2, 3],
       "comments": [
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 5,
       "userId": 2,
       "imageUrl": "https://example.com/post2.jpg",
       "caption": "Having fun at the beach! 🏖️",
@@ -104,7 +104,7 @@
       "profilePicture": "https://example.com/user1.jpg",
       "posts": [1, 2],
       "followers": [2, 3],
-      "following": [2]
+      "following": [2, 3]
     },
     {
       "id": 2,

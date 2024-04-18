@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { ErrorMessage } from "@hookform/error-message";
 import { useEffect } from "react";
+import axios from "axios";
+
 
 
 // 추후 삭제예정
@@ -9,16 +12,18 @@ import dummyData from "../../assets/dummy/data.json";
 
 
 const LoginPage = () => {
-  const {setUserInfo} = userStore()
+  const {setUserInfo, setToken} = userStore()
+  const navigate = useNavigate();
   // 추후 삭제예정
 
+  // useEffect(() => {
 
-  useEffect(() => {
-    const data = dummyData.users.find((user) => user.username === 'user1');
-    console.log(setUserInfo)
-    setUserInfo(data)
-    console.log('render by useEffect')
-  },[])
+  //   const data = dummyData.users.find((user) => user.username === 'user1');
+  //   console.log(setUserInfo)
+  //   setUserInfo(data)
+    
+  //   console.log('render by useEffect')
+  // },[])
 
   // console.log(userInfo)
 // ----------------------------
@@ -30,12 +35,26 @@ const LoginPage = () => {
   } = useForm();
 
   const onSubmit = (formValues) => {
-    resetField("login");
+    resetField("username");
     resetField("password");
-    alert(JSON.stringify(formValues));
+    const url = import.meta.env.VITE_LOGIN_URL
+    // const url = 'http://localhost:5173/login'
+    // const headers = {
+    //   Authorization: `Token ${token}` 
+    // }
+    axios.post(url +'login/', formValues)
+    .then(res => {
+      console.log(res)
+      setToken(res.data.token)
+      setUserInfo(res.data.user)
+      navigate('/')
+    })
+    .catch(error => {
+      console.log(error)
+    })
   };
 
-  const LoginRegister = register("login", {
+  const LoginRegister = register("username", {
     required: {
       value: true,
       message: "사용자 이름을 입력하세요.",
@@ -82,7 +101,7 @@ const LoginPage = () => {
                     />
                     <ErrorMessage
                       errors={errors}
-                      name="login"
+                      name="username"
                       render={({ message }) => (
                         <span className="text-red-500 text-sm pb-1">
                           {message}

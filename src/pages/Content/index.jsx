@@ -2,17 +2,26 @@ import Story from "./Story"
 import Article from "../../components/Article"
 import RecommendUser from "./RecommendUser"
 import userStore from "../../stores/userStore"
-
+import { useNavigate } from "react-router"
+import { useEffect } from "react"
 
 // 더미
 import dummyData from "../../assets/dummy/data.json"
 
+
+
 const ContentPage = () => {
-  const {userInfo} = userStore()
+  const {userInfo, userToken} = userStore()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!userToken) {
+      navigate('/login')
+    }
+  },[])
   
-  const getArticle = () => {
-    const data = dummyData.posts.filter((post) => userInfo.following.includes(post.userId));
-    return data
+  const getArticle = (userInfo) => {
+    const datas = dummyData.posts.filter((post) => userInfo?.followings.includes([post.userId]));
+    return datas
   }
 
   return(
@@ -21,13 +30,10 @@ const ContentPage = () => {
         <div className="mb-6">
           <Story />
         </div>
-        {getArticle().map((post) => (
+        {getArticle(userInfo).map((post) => (
           <Article key={post.id} data={post} />
 
         ))}
-        {/* <Article data={jsonData} />
-        <Article data={jsonData} />
-        <Article data={jsonData} /> */}
       </main>
       <div className="hidden xl:block pl-20">
         <RecommendUser />

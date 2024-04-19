@@ -1,32 +1,42 @@
 import { MdAddAPhoto } from "react-icons/md";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import ProfileArticle from "../../layout/ProfileArticle";
-import dummyData from "../../assets/dummy/data.json";
 import { useState, useEffect } from "react";
+import userStore from "../../stores/userStore";
+import api from "../../util/api";
+
 
 const ProfilePage = () => {
-  const { userName } = useParams();
+  const { userId } = useParams();
   const navigate = useNavigate();
-  const [userData, setUser] = useState(false);
-  const [postData, setPostData] = useState(false);
+  const { userToken } = userStore()
+  const [userData, setUser] = useState({});
+
+
+  const getDetailProfile = async () => {
+    try {
+      const response = await api.get(`contents/${userId}/profile/`)
+
+      setUser(response.data)
+    } catch(error) {
+      console.error(error)
+    }
+  }
+
 
   const getUserPosts = () => {
-    const user = dummyData.users.find((user) => user.username === userName);
-    if (user) {
-      setUser(user);
-      const userPost = dummyData.posts.filter(
-        (post) => post.userId === user.id
-      );
-      if (userPost.length !== 0) {
-        setPostData(userPost);
-      }
+    if (userToken) {
+      return true
     } else {
       navigate("/not-found");
+      return false
     }
   };
 
   useEffect(() => {
-    getUserPosts();
+     if (getUserPosts()) {
+      getDetailProfile()
+     }
   }, []);
 
   return (
@@ -51,12 +61,12 @@ const ProfilePage = () => {
                   </div>
                 </div>
                 <div className="flex font-semibold mb-6">
-                  <p className="mr-4">게시물</p>
+                  <p className="mr-4">게시물 {userData.articles_count ? userData.articles_count : 0}</p>
                   <p className="mr-4">
-                    팔로워 {userData.followers ? userData.followers.length : 0}
+                    팔로워 {userData.followers_count ? userData.followers_count : 0}
                   </p>
                   <p>
-                    팔로우 {userData.followers ? userData.following.length : 0}
+                    팔로우 {userData.followings_count ? userData.followings_count : 0}
                   </p>
                 </div>
                 <div className="">
@@ -91,7 +101,7 @@ const ProfilePage = () => {
 
             <nav className="text-neutral-500 h-[53px]">
               <div className="flex h-full justify-center items-center border-t-2">
-                <NavLink to={`/${userName}`} className="h-full">
+                <NavLink to={`/${userId}`} className="h-full">
                   {({ isActive }) => (
                     <div className="h-full mr-8 ">
                       <span
@@ -122,8 +132,8 @@ const ProfilePage = () => {
 
             {/* 상태 추가예정(게시물 유무) */}
             <div className="my-10">
-              {postData ? (
-                <ProfileArticle postData={postData} />
+              {userData.articles?.length > 0 ? (
+                <ProfileArticle postData={userData.articles } />
               ) : (
                 <div className="flex flex-col items-center">
                   <MdAddAPhoto className="text-6xl mb-5" />

@@ -58,5 +58,5 @@ const ProfileArticle = ({ postData }) => {
 export default ProfileArticle;
 
 ProfileArticle.propTypes = {
-  postData: PropTypes.array.isRequired,
+  postData: PropTypes.object.isRequired,
 };

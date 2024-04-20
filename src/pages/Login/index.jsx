@@ -1,7 +1,13 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { ErrorMessage } from "@hookform/error-message";
+import api from "../../util/api";
+import userStore from "../../stores/userStore";
 
 const LoginPage = () => {
+  const { setUserInfo, setToken } = userStore();
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -10,12 +16,22 @@ const LoginPage = () => {
   } = useForm();
 
   const onSubmit = (formValues) => {
-    resetField("login");
+    resetField("username");
     resetField("password");
-    alert(JSON.stringify(formValues));
+    api
+      .post("accounts/login/", formValues)
+      .then((res) => {
+        console.log(res.data.token);
+        setToken(res.data.token);
+        setUserInfo(res.data.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  const LoginRegister = register("login", {
+  const LoginRegister = register("username", {
     required: {
       value: true,
       message: "사용자 이름을 입력하세요.",
@@ -49,7 +65,7 @@ const LoginPage = () => {
                     src="/images/logo_instagram.png"
                     alt="logo"
                   />
-                  
+
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="flex flex-col items-start"
@@ -62,7 +78,7 @@ const LoginPage = () => {
                     />
                     <ErrorMessage
                       errors={errors}
-                      name="login"
+                      name="username"
                       render={({ message }) => (
                         <span className="text-red-500 text-sm pb-1">
                           {message}

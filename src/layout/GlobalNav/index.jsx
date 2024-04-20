@@ -12,7 +12,11 @@ import { MdOutlineExplore, MdOndemandVideo } from "react-icons/md";
 import NavItem from "../../components/NavItem";
 import { Link, NavLink } from "react-router-dom";
 
+import userStore from "../../stores/userStore";
+
 const GlobalNav = () => {
+  const { userInfo } = userStore()
+
   return (
     <nav className="hidden md:flex md:w-[72px] lg:w-[220px] xl:w-[335px] fixed min-h-screen  flex-col px-4 border-r-2 ">
       <Link to={"/"}>
@@ -39,7 +43,7 @@ const GlobalNav = () => {
           <NavItem icon={<AiOutlineMessage />} text={"메시지"} url={"/"} />
           <NavItem icon={<AiOutlineHeart />} text={"알림"} url={"/"} />
           <NavItem icon={<AiOutlinePlusSquare />} text={"만들기"} url={"/"} />
-          <NavLink to="/user1">
+          <NavLink to={`/${userInfo?.id}`}>
             {({ isActive }) => (
               <NavItem
                 icon={<AiOutlineUser />}

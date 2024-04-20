@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ArticleModal from "../ArticleModal";
 import Modal from "react-modal";
 import useContent from "../../Hooks/contents";
+import useLike from "../../Hooks/like";
 
 const ModalStyles = {
   overlay: {
@@ -22,20 +23,19 @@ const ModalStyles = {
   },
 };
 
-const ArticleBox = ({ data }) => {
+const ArticleBox = ({ data, liked_by_user }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const { post, getArticle } = useContent(data);
+  const { isLike, handleLike } = useLike(data, liked_by_user);
 
   const handleModal = () => {
     getArticle();
     setModalOpen(false);
   };
   useEffect(() => {
-    console.log("effect");
     getArticle();
   }, []);
 
-  console.log("render Article Box", data);
   return (
     <div className="relative w-full mr-1 last:mr-0">
       {post ? (
@@ -63,7 +63,12 @@ const ArticleBox = ({ data }) => {
             ariaHideApp={false}
             onRequestClose={handleModal}
           >
-            <ArticleModal data={post} />
+            <ArticleModal
+              post={post}
+              getArticle={getArticle}
+              isLike={isLike}
+              handleLike={handleLike}
+            />
           </Modal>
         </div>
       ) : (
@@ -75,6 +80,7 @@ const ArticleBox = ({ data }) => {
 
 ArticleBox.propTypes = {
   data: PropTypes.number,
+  liked_by_user: PropTypes.bool,
 };
 
 export default ArticleBox;

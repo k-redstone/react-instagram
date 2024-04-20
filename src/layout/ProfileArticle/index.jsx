@@ -3,16 +3,20 @@ import ArticleBox from "../../components/ArticleBox";
 
 const renderPostContainer = (datas) => {
   const rowCnt = parseInt(datas.length / 3) + 1;
-  console.log(datas);
   let row = 0;
   let itemCnt = 0;
   const containers = [];
   while (row != rowCnt) {
     const items = [];
     for (let i = 0; i < 3; i++) {
-      // console.log(datas[i]);
       if (datas[itemCnt]) {
-        items.push(<ArticleBox key={itemCnt} data={datas[itemCnt].id} />);
+        items.push(
+          <ArticleBox
+            key={itemCnt}
+            data={datas[itemCnt].id}
+            liked_by_user={datas[itemCnt].liked_by_user}
+          />
+        );
       } else {
         items.push(<ArticleBox key={itemCnt} />);
       }
@@ -30,7 +34,6 @@ const renderPostContainer = (datas) => {
 };
 
 const ProfileArticle = ({ postData }) => {
-  console.log(postData.length);
   return (
     <div>
       <div className="flex flex-col">{renderPostContainer(postData)}</div>

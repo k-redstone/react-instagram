@@ -1,36 +1,25 @@
 import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from "react-icons/ai";
-import { useEffect } from "react";
 import { PiPaperPlaneTilt, PiBookmarkSimpleBold } from "react-icons/pi";
 import TextareaAutosize from "react-textarea-autosize";
 import { useForm } from "react-hook-form";
-import useLike from "../../Hooks/like";
 import api from "../../util/api";
-import useContent from "../../Hooks/contents";
 import userStore from "../../stores/userStore";
 
-const ArticleModal = ({ data }) => {
-  const { isLike, handleLike } = useLike(data.id, data.liked_by_user);
-  const { post, getArticle } = useContent(data.id);
+const ArticleModal = ({ getArticle, handleLike, isLike, post }) => {
   const { userInfo, userToken } = userStore();
 
-  const {
-    register,
-    // formState: { errors },
-    handleSubmit,
-    resetField,
-  } = useForm();
+  const { register, handleSubmit, resetField } = useForm();
 
   const onSubmit = (formValues) => {
     resetField("content");
-    resetField("password");
     api
       .post(
-        `contents/${data.id}/comment/`,
+        `contents/${post.id}/comment/`,
         {
           content: formValues.content,
           author: userInfo.id,
-          article: data.id,
+          article: post.id,
         },
         {
           headers: {
@@ -53,14 +42,6 @@ const ArticleModal = ({ data }) => {
     },
   });
 
-  useEffect(() => {
-    getArticle();
-  }, []);
-
-  if (!post) {
-    return null;
-  }
-  console.log(post);
   return (
     <div className="w-full h-full flex">
       {/* 이미지 */}
@@ -92,9 +73,20 @@ const ArticleModal = ({ data }) => {
               <div className="flex grow">
                 <div className="p-2 box-border">
                   {isLike ? (
-                    <AiFillHeart color="red" onClick={handleLike} />
+                    <AiFillHeart
+                      color="red"
+                      onClick={() => {
+                        handleLike();
+                        getArticle();
+                      }}
+                    />
                   ) : (
-                    <AiOutlineHeart onClick={handleLike} />
+                    <AiOutlineHeart
+                      onClick={() => {
+                        handleLike();
+                        getArticle();
+                      }}
+                    />
                   )}
                 </div>
                 <div className="p-2 box-border">
@@ -132,7 +124,10 @@ const ArticleModal = ({ data }) => {
 };
 
 ArticleModal.propTypes = {
-  data: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+  isLike: PropTypes.bool.isRequired,
+  getArticle: PropTypes.func,
+  handleLike: PropTypes.func,
 };
 
 export default ArticleModal;

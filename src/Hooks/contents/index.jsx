@@ -3,7 +3,6 @@ import userStore from "../../stores/userStore";
 import api from "../../util/api";
 
 const useContent = (postId) => {
-  console.log(postId);
   const { userToken } = userStore();
   const [post, setPost] = useState();
 

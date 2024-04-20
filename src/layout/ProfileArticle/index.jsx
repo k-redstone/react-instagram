@@ -12,7 +12,7 @@ const renderPostContainer = (datas) => {
     for (let i = 0; i < 3; i++) {
       // console.log(datas[i]);
       if (datas[itemCnt]) {
-        items.push(<ArticleBox key={itemCnt} data={datas[itemCnt]} />);
+        items.push(<ArticleBox key={itemCnt} data={datas[itemCnt].id} />);
       } else {
         items.push(<ArticleBox key={itemCnt} />);
       }
@@ -58,5 +58,5 @@ const ProfileArticle = ({ postData }) => {
 export default ProfileArticle;
 
 ProfileArticle.propTypes = {
-  postData: PropTypes.object.isRequired,
+  postData: PropTypes.array.isRequired,
 };

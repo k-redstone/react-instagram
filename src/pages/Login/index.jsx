@@ -21,13 +21,12 @@ const LoginPage = () => {
     api
       .post("accounts/login/", formValues)
       .then((res) => {
-        console.log(res.data.token);
         setToken(res.data.token);
         setUserInfo(res.data.user);
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 

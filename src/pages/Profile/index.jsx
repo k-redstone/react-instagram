@@ -4,12 +4,36 @@ import ProfileArticle from "../../layout/ProfileArticle";
 import { useState, useEffect } from "react";
 import userStore from "../../stores/userStore";
 import api from "../../util/api";
+import Modal from "react-modal";
+import FollowModal from "../../components/FollowModal";
+import useFollow from "../../Hooks/follow";
+
+const ModalStyles = {
+  overlay: {
+    backgroundColor: " rgba(0, 0, 0, 0.4)",
+  },
+  content: {
+    zIndex: "999999",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    padding: "0",
+    backgroundColor: "white",
+    width: "30%",
+    height: "60%",
+  },
+};
 
 const ProfilePage = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const { userToken } = userStore();
   const [userData, setUser] = useState({});
+  // const [isFollow, setFollow] = useState(false);
+  const { isFollow, getFollowers, handleFollow } = useFollow(userId);
+  const [isFollowerModalOpen, setFollowerModalOpen] = useState(false);
+  const [isFollowingModalOpen, setFollowingModalOpen] = useState(false);
 
   const getDetailProfile = async () => {
     try {
@@ -25,6 +49,21 @@ const ProfilePage = () => {
     }
   };
 
+  // const openModal = (type) => {
+  //   console.log("asdf");
+  //   return (
+  //     <Modal
+  //       isOpen={isModalOpen}
+  //       shouldCloseOnOverlayClick={true}
+  //       style={ModalStyles}
+  //       ariaHideApp={false}
+  //       onRequestClose={handleModal}
+  //     >
+  //       <FollowModal userId={userId} type={type} />
+  //     </Modal>
+  //   );
+  // };
+
   const getUserPosts = () => {
     if (userToken) {
       return true;
@@ -37,6 +76,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (getUserPosts()) {
       getDetailProfile();
+      getFollowers();
     }
   }, []);
 
@@ -54,9 +94,18 @@ const ProfilePage = () => {
               <div className="">
                 <div className="flex text-xl font-semibold mb-4">
                   <p className="mr-4">{userData.username}</p>
-                  <div className="flex items-center border rounded-md bg-neutral-300 px-3 mr-4">
-                    <p className="text-base">팔로잉</p>
-                  </div>
+                  {isFollow ? (
+                    <div className="flex items-center border rounded-md bg-neutral-300 px-3 mr-4 hover:cursor-pointer">
+                      <p className="text-base">팔로잉</p>
+                    </div>
+                  ) : (
+                    <div
+                      className="flex items-center border rounded-md bg-blue-300 px-3 mr-4 text-white hover:cursor-pointer"
+                      onClick={handleFollow}
+                    >
+                      <p className="text-base">팔로우</p>
+                    </div>
+                  )}
                   <div className="flex items-center border rounded-md bg-neutral-300 px-3 mr-4">
                     <p className="text-base">메시지 보내기</p>
                   </div>
@@ -66,14 +115,42 @@ const ProfilePage = () => {
                     게시물{" "}
                     {userData.articles_count ? userData.articles_count : 0}
                   </p>
-                  <p className="mr-4">
+                  <p
+                    className="mr-4 cursor-pointer"
+                    onClick={() => {
+                      setFollowerModalOpen(true);
+                    }}
+                  >
                     팔로워{" "}
                     {userData.followers_count ? userData.followers_count : 0}
                   </p>
-                  <p>
+                  <Modal
+                    isOpen={isFollowerModalOpen}
+                    shouldCloseOnOverlayClick={true}
+                    style={ModalStyles}
+                    ariaHideApp={false}
+                    onRequestClose={() => setFollowerModalOpen(false)}
+                  >
+                    <FollowModal userId={userId} type="follower" />
+                  </Modal>
+                  <p
+                    className="mr-4 cursor-pointer"
+                    onClick={() => {
+                      setFollowingModalOpen(true);
+                    }}
+                  >
                     팔로우{" "}
                     {userData.followings_count ? userData.followings_count : 0}
                   </p>
+                  <Modal
+                    isOpen={isFollowingModalOpen}
+                    shouldCloseOnOverlayClick={true}
+                    style={ModalStyles}
+                    ariaHideApp={false}
+                    onRequestClose={() => setFollowingModalOpen(false)}
+                  >
+                    <FollowModal userId={userId} type="following" />
+                  </Modal>
                 </div>
                 <div className="">
                   <p>

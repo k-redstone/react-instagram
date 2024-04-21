@@ -6,6 +6,7 @@ import {
   AiOutlineComment,
 } from "react-icons/ai";
 
+import { useNavigate } from "react-router-dom";
 import { PiPaperPlaneTilt, PiBookmarkSimpleBold } from "react-icons/pi";
 import TextareaAutosize from "react-textarea-autosize";
 import { useForm } from "react-hook-form";
@@ -41,7 +42,7 @@ const Article = ({ data }) => {
   const { post, getArticle } = useContent(data.id);
   const { isLike, handleLike } = useLike(data.id, data.liked_by_user);
   const { userInfo, userToken } = userStore();
-
+  const navigate = useNavigate();
   const { register, handleSubmit, resetField } = useForm();
 
   const handleModal = () => {
@@ -94,11 +95,16 @@ const Article = ({ data }) => {
         {/* 상단 */}
         <div className="pb-3">
           <div className="flex h-8 justify-start items-center">
-            <div className="w-8 h-8 border rounded-2xl overflow-hidden">
-              {/* adf */}
+            <div
+              className="w-8 h-8 border rounded-2xl overflow-hidden hover:cursor-pointer"
+              onClick={() => navigate(`/${post.author}`)}
+            >
               <img src="/images/sample.jpg" alt="sample" />
             </div>
-            <div className="flex grow">
+            <div
+              className="flex grow hover:cursor-pointer"
+              onClick={() => navigate(`/${post.author}`)}
+            >
               <div className="pl-3">{post.author}</div>
               <div className="pl-3">{}</div>
             </div>
@@ -117,7 +123,7 @@ const Article = ({ data }) => {
             {/* 각종 기능 이모지 */}
             <div className="flex items-center text-3xl">
               <div className="flex grow">
-                <div className="p-2 box-border">
+                <div className="p-2 box-border hover:cursor-pointer hover:opacity-50">
                   {isLike ? (
                     <AiFillHeart color="red" onClick={handleLike} />
                   ) : (
@@ -142,7 +148,10 @@ const Article = ({ data }) => {
             </div>
             {/* 게시글 내용 */}
             <div className="flex flex-row pl-2">
-              <div className="mr-2 font-bold">
+              <div
+                className="mr-2 font-bold hover:cursor-pointer"
+                onClick={() => navigate(`/${post.author}`)}
+              >
                 <span>{post.author}</span>
               </div>
               <span>{post.content}</span>

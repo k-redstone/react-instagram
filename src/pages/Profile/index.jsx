@@ -5,38 +5,39 @@ import { useState, useEffect } from "react";
 import userStore from "../../stores/userStore";
 import api from "../../util/api";
 
-
 const ProfilePage = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
-  const { userToken } = userStore()
+  const { userToken } = userStore();
   const [userData, setUser] = useState({});
-
 
   const getDetailProfile = async () => {
     try {
-      const response = await api.get(`contents/${userId}/profile/`)
+      const response = await api.get(`contents/${userId}/profile/`, {
+        headers: {
+          Authorization: `Token ${userToken}`,
+        },
+      });
 
-      setUser(response.data)
-    } catch(error) {
-      console.error(error)
+      setUser(response.data);
+    } catch (error) {
+      console.error(error);
     }
-  }
-
+  };
 
   const getUserPosts = () => {
     if (userToken) {
-      return true
+      return true;
     } else {
       navigate("/not-found");
-      return false
+      return false;
     }
   };
 
   useEffect(() => {
-     if (getUserPosts()) {
-      getDetailProfile()
-     }
+    if (getUserPosts()) {
+      getDetailProfile();
+    }
   }, []);
 
   return (
@@ -61,12 +62,17 @@ const ProfilePage = () => {
                   </div>
                 </div>
                 <div className="flex font-semibold mb-6">
-                  <p className="mr-4">게시물 {userData.articles_count ? userData.articles_count : 0}</p>
                   <p className="mr-4">
-                    팔로워 {userData.followers_count ? userData.followers_count : 0}
+                    게시물{" "}
+                    {userData.articles_count ? userData.articles_count : 0}
+                  </p>
+                  <p className="mr-4">
+                    팔로워{" "}
+                    {userData.followers_count ? userData.followers_count : 0}
                   </p>
                   <p>
-                    팔로우 {userData.followings_count ? userData.followings_count : 0}
+                    팔로우{" "}
+                    {userData.followings_count ? userData.followings_count : 0}
                   </p>
                 </div>
                 <div className="">
@@ -133,7 +139,7 @@ const ProfilePage = () => {
             {/* 상태 추가예정(게시물 유무) */}
             <div className="my-10">
               {userData.articles?.length > 0 ? (
-                <ProfileArticle postData={userData.articles } />
+                <ProfileArticle postData={userData.articles} />
               ) : (
                 <div className="flex flex-col items-center">
                   <MdAddAPhoto className="text-6xl mb-5" />

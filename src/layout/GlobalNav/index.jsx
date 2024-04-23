@@ -7,6 +7,7 @@ import {
   AiOutlinePlusSquare,
   AiOutlineUser,
   AiOutlineMore,
+  AiOutlineInstagram,
 } from "react-icons/ai";
 import { MdOutlineExplore, MdOndemandVideo } from "react-icons/md";
 import NavItem from "../../components/NavItem";
@@ -15,16 +16,17 @@ import { Link, NavLink } from "react-router-dom";
 import userStore from "../../stores/userStore";
 
 const GlobalNav = () => {
-  const { userInfo } = userStore()
+  const { userInfo } = userStore();
 
   return (
-    <nav className="hidden md:flex md:w-[72px] lg:w-[220px] xl:w-[335px] fixed min-h-screen  flex-col px-4 border-r-2 ">
+    <nav className="hidden md:flex md:w-[72px] lg:w-[220px] xl:w-[335px] fixed min-h-screen flex-col px-4 border-r-2 item ">
       <Link to={"/"}>
         <img
-          className="w-[103px] h-[29px] mt-10 ml-2"
+          className="hidden lg:block w-[103px] h-[29px] mt-10 ml-2"
           src="/images/logo_instagram.png"
           alt="logo"
         />
+        <AiOutlineInstagram className="text-3xl flex lg:hidden mt-6 ml-1" />
       </Link>
       <div className="h-nav-list-height flex flex-col justify-between">
         <ul className="mt-10">

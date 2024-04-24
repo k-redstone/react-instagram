@@ -10,7 +10,6 @@ const ArticleModal = ({ getArticle, handleLike, isLike, post }) => {
   const { userInfo, userToken } = userStore();
 
   const { register, handleSubmit, resetField } = useForm();
-
   const onSubmit = (formValues) => {
     resetField("content");
     api
@@ -59,11 +58,15 @@ const ArticleModal = ({ getArticle, handleLike, isLike, post }) => {
 
         <div className="py-2">{post.content}</div>
 
-        <div className="pl-4 grow">
+        <div className="pl-2 grow overflow-y-auto">
           {post.comments.map((comment) => (
-            <p key={comment.id} className="py-1">
-              {comment.content}
-            </p>
+            <div key={comment.id} >
+              <span className="font-bold pr-4">{comment.author}</span>
+              <span className="py-1">
+                {comment.content}
+              </span>
+
+            </div>
           ))}
         </div>
         <div className="mb-4">

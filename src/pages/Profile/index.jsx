@@ -33,7 +33,7 @@ const ProfilePage = () => {
   const { userToken } = userStore();
   const [userData, setUser] = useState({});
   // const [isFollow, setFollow] = useState(false);
-  const { isFollow, getFollowers, handleFollow } = useFollow(userId);
+  const { isFollow, getFollowers, handleFollow, getUpdateUserInfo } = useFollow(userId);
   const [isFollowerModalOpen, setFollowerModalOpen] = useState(false);
   const [isFollowingModalOpen, setFollowingModalOpen] = useState(false);
 
@@ -56,6 +56,7 @@ const ProfilePage = () => {
     setFollowingModalOpen(false);
     getDetailProfile();
     getFollowers();
+    getUpdateUserInfo()
   };
 
   const getUserPosts = () => {

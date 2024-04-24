@@ -27,6 +27,7 @@ const useFollow = (userId) => {
       if (response.data.message === "언팔로우 성공") {
         setFollow(false);
       }
+      getUpdateUserInfo()
     } catch (error) {
       console.error(error);
     } finally {
@@ -61,6 +62,8 @@ const useFollow = (userId) => {
       setfollowerData(response.data);
       if (response.data.find((user) => user.id === userInfo.id)) {
         setFollow(true);
+      } else{
+        setFollow(false)
       }
     } catch (error) {
       console.error(error);
@@ -70,17 +73,17 @@ const useFollow = (userId) => {
   };
 
   // 팔로우가 변하면 전역상태 저장
-  const getMyFollowers = async () => {
+  const getUpdateUserInfo = async () => {
     try {
       const response = await api.get(
-        `contents/users/${userInfo.id}/following/`,
+        `accounts/user_info/`,
         {
           headers: {
             Authorization: `Token ${userToken}`,
           },
         }
       );
-      setUserInfo(response.data);
+      setUserInfo(response.data.user);
     } catch (error) {
       console.error(error);
     }
@@ -95,6 +98,7 @@ const useFollow = (userId) => {
     getFollowings,
     handleFollow,
     setDefaultFollow,
+    getUpdateUserInfo
   };
 };
 

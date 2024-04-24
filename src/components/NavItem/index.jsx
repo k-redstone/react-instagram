@@ -8,7 +8,7 @@ const NavItem = ({ icon, text, selected }) => {
           {icon}
         </div>
         <span
-          className={`peer text-base ${
+          className={`peer hidden text-base lg:block ${
             selected ? "font-semibold" : "font-medium"
           }`}
         >
@@ -21,7 +21,7 @@ const NavItem = ({ icon, text, selected }) => {
 
 NavItem.propTypes = {
   icon: PropTypes.object.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   selected: PropTypes.bool,
 };
 

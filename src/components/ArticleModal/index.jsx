@@ -58,9 +58,9 @@ const ArticleModal = ({ getArticle, handleLike, isLike, post }) => {
 
         <div className="py-2">{post.content}</div>
 
-        <div className="pl-2 grow overflow-y-auto">
+        <div className="p-2 grow overflow-y-auto w-80">
           {post.comments.map((comment) => (
-            <div key={comment.id} >
+            <div key={comment.id} className="break-all">
               <span className="font-bold pr-4">{comment.author}</span>
               <span className="py-1">
                 {comment.content}
